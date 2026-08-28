@@ -25,10 +25,11 @@ window.TripCollabStore = (function () {
 
   function addBooking(booking) {
     const data = read();
+    const type = booking.type || "hotel";
     const cost = {
       id: "bk" + Date.now(),
       label: booking.label,
-      type: "hotel",
+      type: type,
       amount: booking.amount,
       currency: booking.currency,
       payer: booking.payer,
@@ -38,7 +39,7 @@ window.TripCollabStore = (function () {
 
     const item = {
       id: "bi" + Date.now(),
-      type: "hotel",
+      type: type,
       time: booking.time || "12:00",
       title: booking.title,
       sub: booking.sub || "Booked on TripCollab",

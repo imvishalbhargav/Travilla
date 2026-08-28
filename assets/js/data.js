@@ -108,7 +108,7 @@ window.TripCollabData = (function () {
     },
   ];
 
-  // Verified local guide.
+  // Verified local guides (Milestone 7). Real photography only — no fake faces.
   const guides = [
     {
       id: "g1",
@@ -120,6 +120,9 @@ window.TripCollabData = (function () {
       rating: "4.9",
       trips: 132,
       verified: true,
+      specialities: ["Hidden waterfalls", "Local food", "Heritage villages"],
+      pricePerDay: 700, // INR
+      available: true,
     },
   ];
 
@@ -253,12 +256,36 @@ window.TripCollabData = (function () {
     },
   ];
 
-  // Foreign-traveller assistance cards.
+  // Foreign-traveller assistance (Milestone 8). Concrete, actionable steps.
   const assistance = [
-    { icon: "i-sim", title: "Local SIM made easy", text: "Get a working Indian SIM for calls & data — arranged before you land." },
-    { icon: "i-rupee", title: "UPI & Indian currency", text: "Set up UPI, see fair exchange, and pay like a local — no gouging." },
-    { icon: "i-lock", title: "Local price transparency", text: "Fair, pre-agreed rates for cabs, guides & stays. No surprises." },
-    { icon: "i-verify", title: "Verified human help", text: "A real, verified local person to help if anything goes wrong." },
+    {
+      icon: "i-sim",
+      title: "Local SIM made easy",
+      text: "Get a working Indian SIM for calls & data — arranged before you land.",
+      steps: ["Verify your passport & visa", "Pick a plan (data + calls)", "SIM activation at arrival desk"],
+      meta: "≈ ₹300 · 28 days",
+    },
+    {
+      icon: "i-rupee",
+      title: "UPI & Indian currency",
+      text: "Set up UPI, see fair exchange, and pay like a local — no gouging.",
+      steps: ["Link a UPI wallet (no card needed)", "See fair ₹/$/€ exchange rates", "Pay by QR at cafés & markets"],
+      meta: "0 hidden fees · shown upfront",
+    },
+    {
+      icon: "i-lock",
+      title: "Local price transparency",
+      text: "Fair, pre-agreed rates for cabs, guides & stays. No surprises.",
+      steps: ["Compare local vs tourist pricing", "Pre-agree cab & guide rates", "Flag anything that feels off"],
+      meta: "Fair-rate pledge",
+    },
+    {
+      icon: "i-verify",
+      title: "Verified human help",
+      text: "A real, verified local person to help if anything goes wrong.",
+      steps: ["24/7 in-app chat", "Language-matched help", "Escalate to a verified local"],
+      meta: "Always-on",
+    },
   ];
 
   return { group, trip, budgetCollab, places, guides, assistance, candidates, matchWeights, tripTotal, costs, currencies, budgetConfig, typeCategory, hotels, IMG };
