@@ -177,6 +177,25 @@ window.TripCollabData = (function () {
     return sum;
   }
 
+  // Currency support (demo rates to INR base). No live API — illustrative.
+  const currencies = {
+    INR: { symbol: "₹", rate: 1 },
+    EUR: { symbol: "€", rate: 92 },
+    USD: { symbol: "$", rate: 83 },
+  };
+
+  // Shared-cost workspace (Milestone 4): one cost line per expense.
+  // split.rule: 'equal' | 'subset' | 'custom'. participants = member ids.
+  const costs = [
+    { id: "lc1", label: "Train · Jaipur → Madgaon (3AC)", type: "train", amount: 1450, currency: "INR", payer: "m1", split: { rule: "equal", participants: ["m1", "m2", "m3", "m4"] } },
+    { id: "lc2", label: "Stay · Little India Beach Cottages (2 nts)", type: "hotel", amount: 2400, currency: "INR", payer: "m2", split: { rule: "equal", participants: ["m1", "m2", "m3", "m4"] } },
+    { id: "lc3", label: "Shared jeep to hidden waterfall", type: "cab", amount: 900, currency: "INR", payer: "m3", split: { rule: "subset", participants: ["m1", "m3", "m4"] } },
+    { id: "lc4", label: "Verified local guide · waterfall trail", type: "guide", amount: 700, currency: "INR", payer: "m4", split: { rule: "subset", participants: ["m1", "m3", "m4"] } },
+    { id: "lc5", label: "Village Goan breakfast", type: "food", amount: 300, currency: "INR", payer: "m1", split: { rule: "equal", participants: ["m1", "m2", "m3", "m4"] } },
+    { id: "lc6", label: "Return flight · Goa → Jaipur", type: "plane", amount: 3600, currency: "INR", payer: "m3", split: { rule: "subset", participants: ["m3", "m4"] } },
+    { id: "lc7", label: "Local SIM + data (foreign travellers)", type: "sim", amount: 25, currency: "EUR", payer: "m3", split: { rule: "subset", participants: ["m3", "m4"] } },
+  ];
+
   // Foreign-traveller assistance cards.
   const assistance = [
     { icon: "i-sim", title: "Local SIM made easy", text: "Get a working Indian SIM for calls & data — arranged before you land." },
@@ -185,5 +204,5 @@ window.TripCollabData = (function () {
     { icon: "i-verify", title: "Verified human help", text: "A real, verified local person to help if anything goes wrong." },
   ];
 
-  return { group, trip, budgetCollab, places, guides, assistance, candidates, matchWeights, tripTotal, IMG };
+  return { group, trip, budgetCollab, places, guides, assistance, candidates, matchWeights, tripTotal, costs, currencies, IMG };
 })();

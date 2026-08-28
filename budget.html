@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="description" content="TripCollab shared cost, budget feasibility and AI budget-increase recommendation." />
+  <meta name="description" content="TripCollab shared-cost workspace: ledger, split rules, settle-up and AI budget advice." />
   <title>Budget · TripCollab</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,33 +30,111 @@
       <section class="welcome fade-up">
         <p class="welcome__kicker">Budget</p>
         <h1 class="welcome__title">See exactly where the money goes.</h1>
-        <p class="welcome__sub">Shared cost calculation, feasibility, and a clear budget-increase recommendation.</p>
+        <p class="welcome__sub">A shared-cost workspace: split rules, per-person balances, settle-up and explainable budget advice.</p>
       </section>
 
+      <!-- Trip selector / currency -->
       <section class="section">
         <div class="card">
           <div class="card__body">
             <div class="section__head" style="margin-bottom:8px">
               <h2 class="section__title">Goa — shared cost</h2>
-              <span class="pill pill--waypoint">Per person</span>
+              <span class="pill pill--waypoint">4 travellers</span>
             </div>
-            <p class="card__meta" style="font-size:var(--tp-caption)">Budget: ₹1,500/person × 4 travellers · pooled with a second group</p>
-            <div class="cost-summary" style="margin-top:16px" id="cost-summary"></div>
+            <div class="field" style="margin-bottom:0">
+              <label for="currency">Display currency</label>
+              <select id="currency">
+                <option value="INR" selected>₹ Indian Rupee</option>
+                <option value="EUR">€ Euro</option>
+                <option value="USD">$ US Dollar</option>
+              </select>
+              <span class="hint">Costs are converted to your display currency (demo rates).</span>
+            </div>
           </div>
         </div>
       </section>
 
+      <!-- Summary -->
+      <section class="section" id="cost-summary-wrap">
+        <div class="card">
+          <div class="card__body">
+            <div class="cost-summary" id="cost-summary"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Per-person ledger -->
+      <section class="section">
+        <div class="section__head">
+          <h2 class="section__title">Per-person balances</h2>
+          <span class="pill pill--amber" id="ledger-balance"></span>
+        </div>
+        <div class="card">
+          <div class="card__body" id="ledger"></div>
+        </div>
+      </section>
+
+      <!-- Cost lines -->
       <section class="section">
         <div class="section__head">
           <h2 class="section__title">Cost lines</h2>
-          <a class="section__link" href="trip.html">Itinerary</a>
+          <button class="btn btn--secondary" type="button" id="add-cost-btn">
+            <svg data-icon="i-plus" aria-hidden="true"></svg> Add cost
+          </button>
         </div>
         <div class="card">
           <div class="card__body" id="cost-lines"></div>
         </div>
       </section>
 
-      <!-- AI Budget feasibility + budget-increase recommendation -->
+      <!-- Add cost form (hidden until toggled) -->
+      <section class="section" id="add-cost-section" hidden>
+        <div class="card" style="border-color:var(--wp-waypoint)">
+          <div class="card__body">
+            <h2 class="section__title" style="margin-bottom:12px">Add a cost line</h2>
+            <div class="field"><label for="add-label">What was it?</label><input id="add-label" type="text" placeholder="e.g. Dinner at beach shack" /></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <div class="field"><label for="add-amount">Amount</label><input id="add-amount" type="number" inputmode="decimal" min="0" step="1" placeholder="500" /></div>
+              <div class="field"><label for="add-currency">Currency</label>
+                <select id="add-currency"><option value="INR">₹ INR</option><option value="EUR">€ EUR</option><option value="USD">$ USD</option></select>
+              </div>
+            </div>
+            <div class="field"><label for="add-payer">Paid by</label>
+              <select id="add-payer"></select>
+            </div>
+            <div class="field"><label for="add-rule">Split rule</label>
+              <select id="add-rule">
+                <option value="equal" selected>Equal — everyone splits</option>
+                <option value="subset">Subset — only some people</option>
+              </select>
+              <span class="hint">(Custom per-person shares are a further refinement; equal + subset cover most group trips.)</span>
+            </div>
+            <div class="field" id="add-subset-wrap" hidden>
+              <label>Who is included?</label>
+              <div id="add-subset" class="subset-picker"></div>
+            </div>
+            <div style="display:flex;gap:12px;flex-wrap:wrap">
+              <button class="btn btn--primary" type="button" id="save-cost">
+                <svg data-icon="i-check" aria-hidden="true"></svg> Save cost line
+              </button>
+              <button class="btn btn--ghost" type="button" id="cancel-cost">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Settle-up -->
+      <section class="section" id="settle-section">
+        <div class="section__head">
+          <h2 class="section__title">Settle up</h2>
+          <a class="section__link" href="trip.html">Itinerary</a>
+        </div>
+        <div class="card">
+          <div class="card__body" id="settle"></div>
+        </div>
+      </section>
+
+      <!-- AI Budget advisement -->
       <section class="section" id="ai-budget"></section>
     </main>
 

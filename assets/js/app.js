@@ -60,6 +60,12 @@
     return "₹" + n.toLocaleString("en-IN");
   }
 
+  // Symbol prepended (for a compact chip); currency-aware.
+  function sym(currency) {
+    return (window.TripCollabData && window.TripCollabData.currencies[currency] && window.TripCollabData.currencies[currency].symbol) ||
+      (currency === "INR" ? "₹" : currency === "EUR" ? "€" : currency === "USD" ? "$" : currency + " ");
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     // Let each page declare its active nav key via <body data-nav="trips">.
     setActiveNav(document.body.getAttribute("data-nav") || "");
@@ -71,6 +77,7 @@
     initialsAvatar: initialsAvatar,
     avatarCluster: avatarCluster,
     inr: inr,
+    sym: sym,
     setActiveNav: setActiveNav,
     icon: function (name, cls) {
       return '<svg class="' + (cls || "icon") + '" data-icon="' + name + '" aria-hidden="true"></svg>';

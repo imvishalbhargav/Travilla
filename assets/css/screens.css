@@ -200,8 +200,7 @@
 }
 
 /* ---- Comments ---- */
-.comment { display: flex; gap: 0.75rem; margin-bottom: var(--sp-3); }
-.comment__avatar {
+.comment { display: flex; gap: 0.75rem; margin-bottom: var(--sp-3); }.comment__avatar {
   flex: none; width: 2rem; height: 2rem; border-radius: 50%;
   display: inline-flex; align-items: center; justify-content: center;
   font-size: 0.75rem; font-weight: 700; color: #fff;
@@ -209,3 +208,28 @@
 .comment__bubble { background: var(--wp-surface-2); border-radius: var(--radius-md); padding: 0.625rem 0.75rem; }
 .comment__name { font-size: var(--tp-caption); font-weight: 700; color: var(--wp-ink); }
 .comment__text { font-size: var(--tp-body-sm); margin: 0.125rem 0 0; color: var(--wp-ink); }
+
+/* ---- Shared-cost workspace (Milestone 4) ---- */
+.row-detail { border-bottom: 1px solid var(--wp-line); }
+.row-detail:last-child { border-bottom: none; }
+.row-detail summary { list-style: none; cursor: pointer; }
+.row-detail summary::-webkit-details-marker { display: none; }
+.row-detail summary .row { padding: var(--sp-3) 0; }
+.row-detail[open] summary .tl-item__icon { background: var(--wp-waypoint-soft); }
+.row-detail__body { padding: 0 0 var(--sp-4) 3.5rem; }
+.row-detail__shared { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+.settle-list .row { padding: var(--sp-3) 0; }
+.settle-list .tl-item__icon { background: var(--wp-amber-soft); color: var(--wp-amber-deep); }
+
+/* ---- Add-cost subset picker ---- */
+.subset-picker { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.sub-option {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--wp-line); border-radius: var(--radius-pill);
+  font-size: var(--tp-body-sm); font-weight: 600; cursor: pointer;
+  background: var(--wp-surface);
+}
+.sub-option:has(input:checked) { background: var(--wp-waypoint-soft); border-color: var(--wp-waypoint); color: var(--wp-waypoint-deep); }
+.sub-option input { accent-color: var(--wp-waypoint); }
