@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="TripCollab profile and travel preferences." />
+  <title>Profile · TripCollab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/tokens.css" />
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/screens.css" />
+</head>
+<body data-nav="profile">
+  <header class="topbar">
+    <span class="topbar__brand">TripCollab</span>
+    <nav aria-label="Primary">
+      <a data-nav="trips" href="index.html">Trips</a>
+      <a data-nav="discover" href="discover.html">Discover</a>
+      <a data-nav="match" href="match.html">Match</a>
+      <a data-nav="budget" href="budget.html">Budget</a>
+      <a data-nav="profile" href="profile.html" aria-current="page">Profile</a>
+    </nav>
+  </header>
+
+  <div class="shell">
+    <main class="main" id="main">
+      <section class="welcome fade-up">
+        <p class="welcome__kicker">Profile</p>
+        <h1 class="welcome__title">Your traveller profile</h1>
+        <p class="welcome__sub">Preferences that power compatible-group matching.</p>
+      </section>
+
+      <section class="section">
+        <div class="card">
+          <div class="card__body" id="profile-head"></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="card">
+          <div class="card__body">
+            <div class="field">
+              <label for="lang">Preferred language</label>
+              <select id="lang"><option>English</option><option selected>Hindi</option><option>中文</option><option>Español</option></select>
+            </div>
+            <div class="field">
+              <label for="style">Travel style</label>
+              <select id="style"><option>Friends</option><option selected>Adventure</option><option>Culture</option><option>Relaxed</option></select>
+            </div>
+            <div class="field">
+              <label for="access">Accessibility needs</label>
+              <input id="access" type="text" placeholder="e.g. step-free access, dietary" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="card">
+          <div class="card__body" id="assistance"></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="empty" style="padding:var(--sp-5)">
+          <svg data-icon="i-verify" class="icon--lg" aria-hidden="true"></svg>
+          <h3>Verified traveller? Coming soon</h3>
+          <p>Optional verification to build extra trust in your group.</p>
+        </div>
+      </section>
+    </main>
+
+    <nav class="tabbar" aria-label="Primary">
+      <a data-nav="trips" href="index.html"><svg class="icon" data-icon="i-trip" aria-hidden="true"></svg><span>Trips</span></a>
+      <a data-nav="discover" href="discover.html"><svg class="icon" data-icon="i-discover" aria-hidden="true"></svg><span>Discover</span></a>
+      <a data-nav="match" href="match.html"><svg class="icon" data-icon="i-match" aria-hidden="true"></svg><span>Match</span></a>
+      <a data-nav="budget" href="budget.html"><svg class="icon" data-icon="i-budget" aria-hidden="true"></svg><span>Budget</span></a>
+      <a data-nav="profile" href="profile.html" aria-current="page"><svg class="icon" data-icon="i-profile" aria-hidden="true"></svg><span>Profile</span></a>
+    </nav>
+  </div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/profile.js"></script>
+</body>
+</html>

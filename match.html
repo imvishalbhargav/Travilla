@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="Match with compatible travellers and pool budgets on TripCollab." />
+  <title>Match · TripCollab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/tokens.css" />
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/screens.css" />
+</head>
+<body data-nav="match">
+  <header class="topbar">
+    <span class="topbar__brand">TripCollab</span>
+    <nav aria-label="Primary">
+      <a data-nav="trips" href="index.html">Trips</a>
+      <a data-nav="discover" href="discover.html">Discover</a>
+      <a data-nav="match" href="match.html" aria-current="page">Match</a>
+      <a data-nav="budget" href="budget.html">Budget</a>
+      <a data-nav="profile" href="profile.html">Profile</a>
+    </nav>
+  </header>
+
+  <div class="shell">
+    <main class="main" id="main">
+      <section class="welcome fade-up">
+        <p class="welcome__kicker">Match</p>
+        <h1 class="welcome__title">Find the group you actually click with.</h1>
+        <p class="welcome__sub">We match travellers by interests, budget, pace and language — then pool budgets so the trip is possible.</p>
+      </section>
+
+      <!-- Signature Budget-Collab moment -->
+      <section class="section" id="match-collab"></section>
+
+      <section class="section">
+        <div class="section__head">
+          <h2 class="section__title">Compatibility score</h2>
+          <a class="section__link" href="budget.html">Budget</a>
+        </div>
+        <div class="card">
+          <div class="card__body" id="compat"></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section__head">
+          <h2 class="section__title">Suggested group</h2>
+        </div>
+        <div class="card">
+          <div class="card__body" id="match-group"></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section__head">
+          <h2 class="section__title">Your travel preferences</h2>
+        </div>
+        <div class="card">
+          <div class="card__body">
+            <div class="field">
+              <label for="budget">Trip budget (per person)</label>
+              <input id="budget" type="number" inputmode="numeric" value="1500" min="0" step="100" />
+              <span class="hint">We use this to find compatible groups and pool budgets.</span>
+            </div>
+            <div class="field">
+              <label for="pace">Travel pace</label>
+              <select id="pace">
+                <option>Slow & relaxed</option>
+                <option selected>Balanced</option>
+                <option>Packed itinerary</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="interests">Interests</label>
+              <select id="interests" multiple size="3" aria-describedby="interests-hint">
+                <option selected>Hidden gems</option>
+                <option selected>Local food</option>
+                <option>Beaches</option>
+                <option>Culture & history</option>
+                <option>Hiking</option>
+              </select>
+              <span class="hint" id="interests-hint">Ctrl/Cmd-click to pick more than one.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <button class="btn btn--primary btn--block" type="button" id="match-cta">
+          <svg data-icon="i-match" aria-hidden="true"></svg> Find my compatible group
+        </button>
+      </section>
+    </main>
+
+    <nav class="tabbar" aria-label="Primary">
+      <a data-nav="trips" href="index.html"><svg class="icon" data-icon="i-trip" aria-hidden="true"></svg><span>Trips</span></a>
+      <a data-nav="discover" href="discover.html"><svg class="icon" data-icon="i-discover" aria-hidden="true"></svg><span>Discover</span></a>
+      <a data-nav="match" href="match.html" aria-current="page"><svg class="icon" data-icon="i-match" aria-hidden="true"></svg><span>Match</span></a>
+      <a data-nav="budget" href="budget.html"><svg class="icon" data-icon="i-budget" aria-hidden="true"></svg><span>Budget</span></a>
+      <a data-nav="profile" href="profile.html"><svg class="icon" data-icon="i-profile" aria-hidden="true"></svg><span>Profile</span></a>
+    </nav>
+  </div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/match.js"></script>
+</body>
+</html>

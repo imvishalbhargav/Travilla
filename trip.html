@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="TripCollab trip — collaborative itinerary, shared cost and verified local guides." />
+  <title>Goa Trip · TripCollab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/tokens.css" />
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/screens.css" />
+</head>
+<body data-nav="trips">
+  <!-- Desktop top nav -->
+  <header class="topbar">
+    <span class="topbar__brand">TripCollab</span>
+    <nav aria-label="Primary">
+      <a data-nav="trips" href="index.html">Trips</a>
+      <a data-nav="discover" href="discover.html">Discover</a>
+      <a data-nav="match" href="match.html">Match</a>
+      <a data-nav="budget" href="budget.html">Budget</a>
+      <a data-nav="profile" href="profile.html">Profile</a>
+    </nav>
+  </header>
+
+  <div class="shell">
+    <a class="btn btn--ghost" href="index.html" aria-label="Back to trips" style="margin-top:12px">
+      <svg data-icon="i-arrow" class="icon" style="transform:scaleX(-1)" aria-hidden="true"></svg> Trips
+    </a>
+
+    <main class="main" id="main">
+      <section id="trip-hero" class="fade-up"></section>
+
+      <section class="section" id="budget-collab"></section>
+
+      <section class="section">
+        <div class="section__head">
+          <h2 class="section__title">Itinerary</h2>
+          <a class="section__link" href="budget.html">Budget</a>
+        </div>
+        <nav class="tabs" aria-label="Itinerary views" style="margin-bottom:var(--sp-4)">
+          <a href="#" aria-selected="true">Day-by-day</a>
+          <a href="#" aria-selected="false">Map view</a>
+          <a href="#" aria-selected="false">Meals</a>
+        </nav>
+        <div id="itinerary"></div>
+      </section>
+
+      <section class="section" id="comments-section"></section>
+
+      <section class="section">
+        <div class="section__head">
+          <h2 class="section__title">Share the plan</h2>
+        </div>
+        <div class="card">
+          <div class="card__body">
+            <p style="margin-bottom:12px">Invite your group to plan together with a single link — they can join instantly.</p>
+            <div style="display:flex; gap:12px; flex-wrap:wrap">
+              <button class="btn btn--primary" type="button" id="copy-link">
+                <svg data-icon="i-chat" aria-hidden="true"></svg> Copy invite link
+              </button>
+              <select class="chip" aria-label="Visibility" style="min-height:44px; padding:0 12px; border-radius:999px; border:1px solid var(--wp-line)">
+                <option>Private</option>
+                <option>Group</option>
+                <option>Public</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="tabbar" aria-label="Primary">
+      <a data-nav="trips" href="index.html"><svg class="icon" data-icon="i-trip" aria-hidden="true"></svg><span>Trips</span></a>
+      <a data-nav="discover" href="discover.html"><svg class="icon" data-icon="i-discover" aria-hidden="true"></svg><span>Discover</span></a>
+      <a data-nav="match" href="match.html"><svg class="icon" data-icon="i-match" aria-hidden="true"></svg><span>Match</span></a>
+      <a data-nav="budget" href="budget.html"><svg class="icon" data-icon="i-budget" aria-hidden="true"></svg><span>Budget</span></a>
+      <a data-nav="profile" href="profile.html"><svg class="icon" data-icon="i-profile" aria-hidden="true"></svg><span>Profile</span></a>
+    </nav>
+  </div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/trip.js"></script>
+</body>
+</html>

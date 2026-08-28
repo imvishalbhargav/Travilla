@@ -1,0 +1,164 @@
+/* ============================================================
+   TripCollab — Feature styles (Milestone 2 screens)
+   Trips list, trip home, itinerary, discover, budget-collab.
+   ============================================================ */
+
+/* ---- Home / Trips list ---- */
+.welcome { margin-top: var(--sp-5); }
+.welcome__kicker { font: 600 var(--tp-caption) var(--font-ui); color: var(--wp-waypoint); text-transform: uppercase; letter-spacing: 0.08em; }
+.welcome__title { font: var(--tp-d2); margin-top: 0.25rem; }
+.welcome__sub { margin-top: 0.25rem; }
+
+.trip-card { display: block; margin-bottom: var(--sp-4); color: inherit; }
+.trip-card:hover { text-decoration: none; }
+.trip-card .media { aspect-ratio: 16 / 9; }
+.trip-card__body { display: flex; align-items: center; gap: 1rem; padding: var(--sp-4); }
+.trip-card__title { font: var(--tp-h1); }
+.trip-card__meta { font-size: var(--tp-body-sm); color: var(--wp-ink-soft); display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+.trip-card__status { margin-left: auto; }
+
+/* ---- Floating create button ---- */
+.fab {
+  position: fixed;
+  right: var(--sp-5);
+  bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+  z-index: 15;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  min-height: 52px; padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-pill);
+  font: var(--tp-btn);
+  color: #fff;
+  background: var(--wp-waypoint);
+  box-shadow: 0 10px 24px var(--wp-shadow);
+  transition: transform var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+}
+.fab:hover { background: var(--wp-waypoint-deep); text-decoration: none; transform: translateY(-1px); }
+.fab svg { width: 1.25rem; height: 1.25rem; }
+.fab--text { position: static; }
+
+/* ---- Trip home header ---- */
+.hero {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  min-height: 240px;
+  display: flex; align-items: flex-end;
+  margin-top: var(--sp-5);
+  color: #fff;
+}
+.hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero__scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18,36,43,0.05) 0%, rgba(18,36,43,0.62) 78%); }
+.hero__content { position: relative; padding: var(--sp-5); }
+.hero__title { font: var(--tp-d1); color: #fff; }
+.hero__meta { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem; color: #fff; }
+.hero__meta .pill { background: rgba(255,255,255,0.22); color: #fff; }
+
+/* ---- Itinerary timeline ---- */
+.tl { position: relative; padding-left: 1.5rem; }
+.tl::before {
+  content: ""; position: absolute; left: 6px; top: 6px; bottom: 6px;
+  width: 2px; background: var(--wp-waypoint-soft); border-radius: 2px;
+}
+.tl-day { margin-bottom: var(--sp-5); }
+.tl-day__head { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: var(--sp-3); }
+.tl-day__num { font: var(--tp-h1); color: var(--wp-waypoint); }
+.tl-day__label { font-size: var(--tp-body-sm); color: var(--wp-ink-soft); }
+.tl-item { position: relative; margin-bottom: var(--sp-3); }
+.tl-item::before {
+  content: ""; position: absolute; left: -1.5rem; top: 4px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--wp-surface); border: 2px solid var(--wp-waypoint);
+}
+.tl-item__time { font: 600 var(--tp-caption) var(--font-numeric); color: var(--wp-ink-soft); }
+.tl-item .card__body { display: flex; gap: 1rem; }
+.tl-item__icon {
+  width: 2.5rem; height: 2.5rem; flex: none; border-radius: var(--radius-sm);
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--wp-waypoint-soft); color: var(--wp-waypoint-deep);
+}
+.tl-item__thumb {
+  flex: none; width: 3.5rem; height: 3.5rem; border-radius: var(--radius-sm);
+  object-fit: cover; border: 1px solid var(--wp-line);
+}
+.tl-item__title { font-weight: 600; }
+.tl-item__sub { font-size: var(--tp-body-sm); color: var(--wp-ink-soft); }
+.tl-item__foot { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem; }
+
+/* ---- Shared cost summary ---- */
+.cost-summary {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-3);
+  padding: var(--sp-4);
+  background: var(--wp-surface); border: 1px solid var(--wp-line); border-radius: var(--radius-lg);
+}
+.cost-summary__val { font: 600 1.25rem/1.1 var(--font-numeric); color: var(--wp-ink); }
+.cost-summary__lab { font-size: var(--tp-caption); color: var(--wp-ink-soft); }
+
+/* ---- Budget-collab moment ---- */
+.bc {
+  position: relative;
+  padding: var(--sp-5);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--wp-waypoint-soft), #e6f3f4);
+  border: 1px solid var(--wp-waypoint);
+  overflow: hidden;
+}
+.bc__title { font: var(--tp-h1); color: var(--wp-waypoint-deep); }
+.bc__pools { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin: var(--sp-4) 0; }
+.bc__pool {
+  display: inline-flex; flex-direction: column; align-items: center; justify-content: center;
+  min-width: 5.5rem; padding: 0.625rem 0.75rem;
+  border-radius: var(--radius-md);
+  background: var(--wp-surface); border: 1px solid var(--wp-line);
+  box-shadow: 0 1px 2px var(--wp-shadow);
+}
+.bc__pool strong { font: 600 1rem var(--font-numeric); color: var(--wp-ink); }
+.bc__pool span { font-size: var(--tp-caption); color: var(--wp-ink-soft); }
+.bc__plus { font: 600 1.25rem var(--font-ui); color: var(--wp-waypoint); }
+.bc__eq { font: 700 1.25rem var(--font-ui); color: var(--wp-waypoint-deep); }
+.bc__total {
+  display: inline-flex; flex-direction: column; align-items: center; justify-content: center;
+  min-width: 6rem; padding: 0.75rem;
+  border-radius: var(--radius-md);
+  background: var(--wp-waypoint); color: #fff; box-shadow: 0 6px 16px var(--wp-shadow);
+}
+.bc__total strong { font: 700 1.25rem var(--font-numeric); color: #fff; }
+.bc__total span { font-size: var(--tp-caption); color: rgba(255,255,255,0.85); }
+.bc__list { display: grid; gap: 0.5rem; margin: var(--sp-3) 0 0; }
+.bc__list li { display: flex; align-items: center; gap: 0.5rem; font-size: var(--tp-body-sm); color: var(--wp-ink); }
+.bc__list svg { width: 1rem; height: 1rem; color: var(--wp-verify); flex: none; }
+
+/* ---- Discover / place cards ---- */
+.grid { display: grid; gap: var(--sp-4); }
+@media (min-width: 740px) { .grid { grid-template-columns: 1fr 1fr; } }
+.place-card .media { aspect-ratio: 3 / 2; }
+.place-card__body { padding: var(--sp-4); }
+.place-card__tags { display: flex; gap: 0.375rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+.place-card__title { font: var(--tp-h2); margin-bottom: 0.25rem; }
+.place-card__desc { font-size: var(--tp-body-sm); color: var(--wp-ink-soft); }
+
+/* ---- Guide card ---- */
+.guide-card { display: flex; gap: 1rem; padding: var(--sp-4); align-items: center; }
+.guide-card__photo {
+  flex: none; width: 3.5rem; height: 3.5rem; border-radius: 50%;
+  object-fit: cover; border: 2px solid var(--wp-verify);
+}
+.guide-card__name { font-weight: 700; display: flex; align-items: center; gap: 0.375rem; }
+.guide-card__role { font-size: var(--tp-body-sm); color: var(--wp-ink-soft); }
+.guide-card__rate { font-size: var(--tp-caption); color: var(--wp-amber-deep); font-weight: 600; }
+
+/* ---- Empty / error states ---- */
+.empty { text-align: center; padding: var(--sp-7) var(--sp-4); color: var(--wp-ink-soft); }
+.empty svg { width: 3rem; height: 3rem; color: var(--wp-line); margin: 0 auto 1rem; }
+.empty h3 { font: var(--tp-h2); color: var(--wp-ink); margin-bottom: 0.25rem; }
+.empty p { font-size: var(--tp-body-sm); max-width: 32ch; margin: 0 auto; }
+
+/* ---- Comments ---- */
+.comment { display: flex; gap: 0.75rem; margin-bottom: var(--sp-3); }
+.comment__avatar {
+  flex: none; width: 2rem; height: 2rem; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 700; color: #fff;
+}
+.comment__bubble { background: var(--wp-surface-2); border-radius: var(--radius-md); padding: 0.625rem 0.75rem; }
+.comment__name { font-size: var(--tp-caption); font-weight: 700; color: var(--wp-ink); }
+.comment__text { font-size: var(--tp-body-sm); margin: 0.125rem 0 0; color: var(--wp-ink); }
