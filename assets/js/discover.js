@@ -8,10 +8,38 @@
   const D = window.TripCollabData;
 
   document.addEventListener("DOMContentLoaded", function () {
+    renderDestinations();
     renderPlaces();
     renderGuides();
     renderAssist();
   });
+
+  function renderDestinations() {
+    const grid = document.getElementById("destination-grid");
+    if (!grid) return;
+    grid.innerHTML = D.destinations
+      .map(function (d) {
+        return (
+          '<a class="card place-card" href="transport.html">' +
+            '<div class="media">' +
+              '<img src="' + d.img + '" alt="' + d.name + " — " + d.state + '" loading="lazy" decoding="async" width="800" height="533" />' +
+              '<span class="media__badge">' + TC.icon("i-pin") + " " + d.tag + "</span>" +
+            "</div>" +
+            '<div class="place-card__body">' +
+              '<h3 class="place-card__title">' + d.name + ' <span class="card__meta">· ' + d.state + "</span></h3>" +
+              '<p class="place-card__desc">' + d.desc + "</p>" +
+              '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:8px">' +
+                '<span class="chip">' + TC.icon("i-star") + " " + d.rating + "</span>" +
+                '<span class="chip">' + TC.icon("i-budget") + " from " + TC.inr(d.from) + "</span>" +
+                (d.popular ? '<span class="pill pill--amber">Popular</span>' : "") +
+              "</div>" +
+            "</div>" +
+          "</a>"
+        );
+      })
+      .join("");
+    TC.hydrateIcons(grid);
+  }
 
   function renderPlaces() {
     const grid = document.getElementById("places-grid");

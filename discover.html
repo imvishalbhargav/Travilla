@@ -19,6 +19,7 @@
     <nav aria-label="Primary">
       <a data-nav="trips" href="index.html">Trips</a>
       <a data-nav="discover" href="discover.html" aria-current="page">Discover</a>
+      <a data-nav="transport" href="transport.html">Transport</a>
       <a data-nav="match" href="match.html">Match</a>
       <a data-nav="budget" href="budget.html">Budget</a>
       <a data-nav="profile" href="profile.html">Profile</a>
@@ -48,6 +49,28 @@
             </a>
           </div>
         </div>
+      </section>
+
+      <section class="section">
+        <div class="card" style="border-color:var(--wp-amber)">
+          <div class="card__body" style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+            <span class="tl-item__icon"><svg class="icon" data-icon="i-train" aria-hidden="true"></svg></span>
+            <div style="flex:1;min-width:0">
+              <h2 class="section__title" style="margin:0">Book the group's travel</h2>
+              <p class="card__meta" style="margin:4px 0 0">Flights, trains, buses & cabs across India — added straight to your shared cost & itinerary.</p>
+            </div>
+            <a class="btn btn--primary" href="transport.html">
+              <svg data-icon="i-train" aria-hidden="true"></svg> Book transport
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section__head">
+          <h2 class="section__title">Bring the trip here</h2>
+        </div>
+        <div class="grid" id="destination-grid"></div>
       </section>
 
       <section class="section">

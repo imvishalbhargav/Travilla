@@ -52,6 +52,51 @@ window.TripCollabData = (function () {
     ],
   };
 
+  // All-India destinations (Milestone 10). Real photography only.
+  const destinations = [
+    { id: "d-goa", name: "Goa", state: "Goa", img: IMG + "goa-beach.jpg", tag: "Beaches & hidden gems", desc: "Palm beaches, secret waterfalls and a vibrant beach-hut culture.", rating: 4.7, from: 950, popular: false },
+    { id: "d-kerala", name: "Kerala", state: "Kerala", img: IMG + "dest-kerala.jpg", tag: "Backwaters & houseboats", desc: "Glide the palm-lined backwaters on a traditional houseboat.", rating: 4.8, from: 1200, popular: true },
+    { id: "d-varanasi", name: "Varanasi", state: "Uttar Pradesh", img: IMG + "dest-varanasi.jpg", tag: "Ghats & culture", desc: "Sunrise aarti on the ghats and a thousand-year-old living city.", rating: 4.8, from: 800, popular: true },
+    { id: "d-hampi", name: "Hampi", state: "Karnataka", img: IMG + "dest-hampi.jpg", tag: "Boulders & ruins", desc: "A surreal landscape of boulders and the ruins of a forgotten empire.", rating: 4.7, from: 850, popular: false },
+    { id: "d-rishikesh", name: "Rishikesh", state: "Uttarakhand", img: IMG + "dest-rishikesh.jpg", tag: "River & adventure", desc: "The yoga capital on the Ganges, with river rafting and footbridges.", rating: 4.6, from: 700, popular: false },
+    { id: "d-ladakh", name: "Ladakh", state: "Ladakh", img: IMG + "dest-ladakh.jpg", tag: "Mountains & lakes", desc: "High-altitude deserts, crystal lakes and mountain passes.", rating: 4.9, from: 2500, popular: true },
+  ];
+
+  // Transport booking inventory (Milestone 10). Real photography. Demo data.
+  const transport = {
+    bus: [
+      { id: "b1", operator: "Volvo AC Sleeper", img: IMG + "transport-train.jpg", from: "Bangalore", to: "Goa", departure: "21:30", duration: "9h 10m", price: 850 },
+      { id: "b2", operator: "IntrCity SmartBus", img: IMG + "transport-train.jpg", from: "Delhi", to: "Jaipur", departure: "07:00", duration: "5h 30m", price: 520 },
+      { id: "b3", operator: "RedBus Premium", img: IMG + "transport-train.jpg", from: "Hyderabad", to: "Vijayawada", departure: "22:00", duration: "8h", price: 610 },
+    ],
+    plane: [
+      { id: "f1", operator: "IndiGo 6E", img: IMG + "transport-plane.jpg", from: "Delhi", to: "Goa", departure: "09:45", duration: "2h 20m", price: 3600 },
+      { id: "f2", operator: "Air India Express", img: IMG + "transport-plane.jpg", from: "Mumbai", to: "Kochi", departure: "13:10", duration: "2h 05m", price: 2900 },
+      { id: "f3", operator: "SpiceJet", img: IMG + "transport-plane.jpg", from: "Delhi", to: "Leh", departure: "06:30", duration: "1h 30m", price: 4800 },
+    ],
+    train: [
+      { id: "t1", operator: "Vande Bharat Express", img: IMG + "transport-train.jpg", from: "Delhi", to: "Jaipur", departure: "06:10", duration: "4h 40m", price: 1450 },
+      { id: "t2", operator: "Shatabdi Express", img: IMG + "transport-train.jpg", from: "Mumbai", to: "Goa", departure: "05:50", duration: "8h 50m", price: 1150 },
+      { id: "t3", operator: "Rajdhani Express", img: IMG + "transport-train.jpg", from: "Jaipur", to: "Varanasi", departure: "18:30", duration: "11h", price: 1650 },
+    ],
+    cab: [
+      { id: "c1", operator: "Local taxi · Sedan", img: IMG + "train-platform.jpg", from: "Goa Airport", to: "Palolem", departure: "On demand", duration: "1h 30m", price: 900 },
+      { id: "c2", operator: "Shared jeep", img: IMG + "train-platform.jpg", from: "Palolem", to: "Netravali waterfall", departure: "On demand", duration: "1h", price: 400 },
+      { id: "c3", operator: "Auto / rickshaw", img: IMG + "train-platform.jpg", from: "Jaipur Bazaar", to: "Hawa Mahal", departure: "On demand", duration: "15m", price: 80 },
+    ],
+  };
+
+  // Reviews & feedback (Amazon-style, Milestone 10). Photo upload enabled.
+  const reviews = {
+    target: "Goa — Hidden Beaches & Local Culture",
+    aggregate: { avg: 4.7, count: 148 },
+    items: [
+      { id: "r1", name: "Mei", initials: "ME", color: "var(--wp-verify)", rating: 5, title: "The hidden waterfall blew my mind", text: "Ravi the guide knew exactly where to go. Budget-Collab made it possible for our whole group — worth every rupee.", date: "2 weeks ago", helpful: 24, img: "" },
+      { id: "r2", name: "Rahul", initials: "RA", color: "var(--wp-amber)", rating: 4, title: "Great value, keep the jeep early", text: "Beach cottage was clean and right on the sand. Start the waterfall early to beat the crowds.", date: "1 week ago", helpful: 11, img: IMG + "hidden-waterfall.jpg" },
+      { id: "r3", name: "Lena", initials: "LE", color: "#B9770E", rating: 5, title: "As a foreign traveller, this was perfect", text: "SIM + UPI setup took 10 minutes. No one overcharged me once. The platform really protects you.", date: "5 days ago", helpful: 19, img: IMG + "goa-beach.jpg" },
+    ],
+  };
+
   // Budget-Collab story: two groups of 1500 pool to 3000.
   const budgetCollab = {
     title: "Budget-Collab — travel is possible together",
@@ -288,5 +333,5 @@ window.TripCollabData = (function () {
     },
   ];
 
-  return { group, trip, budgetCollab, places, guides, assistance, candidates, matchWeights, tripTotal, costs, currencies, budgetConfig, typeCategory, hotels, IMG };
+  return { group, trip, budgetCollab, places, guides, assistance, candidates, matchWeights, tripTotal, costs, currencies, budgetConfig, typeCategory, hotels, destinations, transport, reviews, IMG };
 })();
