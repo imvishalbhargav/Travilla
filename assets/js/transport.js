@@ -38,9 +38,19 @@
     if (!list) return;
     const key = MODE_KEY[mode];
     if (title) title.textContent = LABELS[mode];
-    if (count) count.textContent = (D.transport[key] || []).length + " options";
+    const items = (D.transport && D.transport[key]) || [];
+    if (count) count.textContent = items.length + " options";
 
-    list.innerHTML = (D.transport[key] || [])
+    if (!items.length) {
+      list.innerHTML =
+        '<div class="card" style="margin-bottom:16px"><div class="card__body">' +
+          '<p class="card__meta" style="margin:0">No ' + LABELS[mode].toLowerCase() + " available right now. Try another mode.</p>" +
+        "</div></div>";
+      bindBook();
+      return;
+    }
+
+    list.innerHTML = items
       .map(function (o, i) {
         const perPerson = Math.round(o.price);
         return (
