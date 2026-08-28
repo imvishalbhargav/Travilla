@@ -400,6 +400,7 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
+    if (window.TripCollabStore) window.TripCollabStore.hydrate();
     renderAddPayer();
     renderSubsetPicker();
     renderScenarios();

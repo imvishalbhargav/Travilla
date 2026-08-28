@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="description" content="Discover hidden gems, local culture and verified local guides on TripCollab." />
-  <title>Discover · TripCollab</title>
+  <meta name="description" content="TripCollab — book group stays tied to your trip and shared cost." />
+  <title>Stays · TripCollab</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet" />
@@ -26,50 +26,47 @@
   </header>
 
   <div class="shell">
+    <a class="btn btn--ghost" href="discover.html" aria-label="Back to discover" style="margin-top:12px">
+      <svg data-icon="i-arrow" class="icon" style="transform:scaleX(-1)" aria-hidden="true"></svg> Discover
+    </a>
+
     <main class="main" id="main">
       <section class="welcome fade-up">
-        <p class="welcome__kicker">Discover</p>
-        <h1 class="welcome__title">Hidden gems, real places, real people.</h1>
-        <p class="welcome__sub">What most tourists never find — with verified local guides and real photography.</p>
+        <p class="welcome__kicker">Stays · Goa</p>
+        <h1 class="welcome__title">Book the group's stay.</h1>
+        <p class="welcome__sub">Real, reviewed places that fit your pooled budget — booking carries straight into your shared cost and itinerary.</p>
       </section>
 
+      <!-- Filter -->
       <section class="section">
-        <div class="card" style="border-color:var(--wp-waypoint)">
-          <div class="card__body" style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
-            <span class="tl-item__icon"><svg class="icon" data-icon="i-hotel" aria-hidden="true"></svg></span>
-            <div style="flex:1;min-width:0">
-              <h2 class="section__title" style="margin:0">Book the group's stay</h2>
-              <p class="card__meta" style="margin:4px 0 0">Real, reviewed stays that flow straight into your shared cost & itinerary.</p>
+        <div class="card">
+          <div class="card__body">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <div class="field"><label for="checkin">Check-in</label><input id="checkin" type="text" value="14 Dec" /></div>
+              <div class="field"><label for="checkout">Check-out</label><input id="checkout" type="text" value="18 Dec" /></div>
             </div>
-            <a class="btn btn--primary" href="hotels.html">
-              <svg data-icon="i-hotel" aria-hidden="true"></svg> Book stays
-            </a>
+            <div class="field"><label for="guests">Travellers</label>
+              <select id="guests"><option value="4" selected>4 travellers · 2 rooms</option><option value="2">2 travellers · 1 room</option><option value="6">6 travellers · 3 rooms</option></select>
+            </div>
+            <p class="card__meta" id="stay-hint">Pooled budget ~₹3,000/person · cost splits equally.</p>
           </div>
         </div>
       </section>
 
-      <section class="section">
-        <div class="section__head">
-          <h2 class="section__title">Hidden places & local culture</h2>
-        </div>
-        <div class="grid" id="places-grid"></div>
-      </section>
+      <!-- Booking confirmation toast -->
+      <div class="toast" id="stay-toast" role="status" aria-live="polite" hidden></div>
 
+      <!-- Properties -->
       <section class="section">
         <div class="section__head">
-          <h2 class="section__title">Verified local guides</h2>
+          <h2 class="section__title">Properties</h2>
+          <span class="pill pill--waypoint" id="stay-count">3 stays</span>
         </div>
-        <div class="card" id="guide-list"></div>
-      </section>
-
-      <section class="section">
-        <div class="section__head">
-          <h2 class="section__title">Foreign-traveller assistance</h2>
-        </div>
-        <div class="grid" id="assist-grid"></div>
+        <div id="hotel-list"></div>
       </section>
     </main>
 
+    <!-- Bottom tab bar (mobile) -->
     <nav class="tabbar" aria-label="Primary">
       <a data-nav="trips" href="index.html"><svg class="icon" data-icon="i-trip" aria-hidden="true"></svg><span>Trips</span></a>
       <a data-nav="discover" href="discover.html" aria-current="page"><svg class="icon" data-icon="i-discover" aria-hidden="true"></svg><span>Discover</span></a>
@@ -81,6 +78,7 @@
 
   <script src="assets/js/data.js"></script>
   <script src="assets/js/app.js"></script>
-  <script src="assets/js/discover.js"></script>
+  <script src="assets/js/store.js"></script>
+  <script src="assets/js/hotels.js"></script>
 </body>
 </html>

@@ -219,6 +219,40 @@ window.TripCollabData = (function () {
     sim: "Connectivity & misc",
   };
 
+  // Hotel inventory (Milestone 6 — first booking vertical). Real photography.
+  const hotels = [
+    {
+      id: "h1",
+      name: "Little India Beach Cottages",
+      place: "Palolem, South Goa",
+      img: IMG + "goa-stay.jpg",
+      rating: "4.8", reviews: 212,
+      perNight: 1200, rooms: 2, type: "Beach cottage",
+      tags: ["Beachfront", "Free breakfast"],
+      desc: "Twin-sharing thatched cottages a step from the sand. The group's pick for hidden-beach access.",
+    },
+    {
+      id: "h2",
+      name: "Casa Beach Hut Resort",
+      place: "Agonda, South Goa",
+      img: IMG + "stay-beach-hut.jpg",
+      rating: "4.7", reviews: 168,
+      perNight: 950, rooms: 2, type: "Beach hut resort",
+      tags: ["Seafront", "Quiet", "Family-run"],
+      desc: "Wooden beach huts under palms, quieter than Palolem. Great value for the pooled budget.",
+    },
+    {
+      id: "h3",
+      name: "Mansão — Heritage Portuguese House",
+      place: "Old Goa",
+      img: IMG + "stay-heritage.jpg",
+      rating: "4.9", reviews: 96,
+      perNight: 2000, rooms: 2, type: "Heritage guesthouse",
+      tags: ["Heritage", "Courtyard dining", "Cultural"],
+      desc: "A 236-year-old Portuguese mansion courtyard. A premium culture-first stay for the group.",
+    },
+  ];
+
   // Foreign-traveller assistance cards.
   const assistance = [
     { icon: "i-sim", title: "Local SIM made easy", text: "Get a working Indian SIM for calls & data — arranged before you land." },
@@ -227,5 +261,5 @@ window.TripCollabData = (function () {
     { icon: "i-verify", title: "Verified human help", text: "A real, verified local person to help if anything goes wrong." },
   ];
 
-  return { group, trip, budgetCollab, places, guides, assistance, candidates, matchWeights, tripTotal, costs, currencies, budgetConfig, typeCategory, IMG };
+  return { group, trip, budgetCollab, places, guides, assistance, candidates, matchWeights, tripTotal, costs, currencies, budgetConfig, typeCategory, hotels, IMG };
 })();

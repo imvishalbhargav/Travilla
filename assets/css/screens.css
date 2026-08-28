@@ -233,3 +233,26 @@
 }
 .sub-option:has(input:checked) { background: var(--wp-waypoint-soft); border-color: var(--wp-waypoint); color: var(--wp-waypoint-deep); }
 .sub-option input { accent-color: var(--wp-waypoint); }
+
+/* ---- Hotels (Milestone 6) ---- */
+.hotel-card__body { padding: var(--sp-4); }
+.hotel-card__foot {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap; margin-top: 12px;
+}
+.hotel-card__price { font: 700 1.375rem/1 var(--font-numeric); color: var(--wp-ink); }
+.hotel-card__per { font-size: var(--tp-body-sm); color: var(--wp-ink-soft); }
+
+/* ---- Inline toast ---- */
+.toast {
+  position: fixed; left: 50%; bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  z-index: 30;
+  max-width: 90vw; padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  background: var(--wp-ink); color: #fff;
+  font-size: var(--tp-body-sm); font-weight: 600;
+  box-shadow: 0 10px 24px var(--wp-shadow);
+  text-align: center;
+  animation: fadeUp var(--dur-slow) var(--ease-out) both;
+}
