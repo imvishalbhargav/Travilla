@@ -134,8 +134,44 @@
         </div>
       </section>
 
-      <!-- AI Budget advisement -->
-      <section class="section" id="ai-budget"></section>
+      <!-- AI Budget intelligence (feasibility + sensitivity + recommendation) -->
+      <section class="section" id="ai-analyzer">
+        <div class="section__head">
+          <h2 class="section__title">AI budget analyser</h2>
+          <span class="pill pill--waypoint">Explainable</span>
+        </div>
+        <div class="card" style="border-color:var(--wp-waypoint)">
+          <div class="card__body">
+            <!-- Feasibility status -->
+            <div id="ai-status"></div>
+
+            <!-- Category breakdown -->
+            <h3 class="card__title" style="margin:16px 0 8px">Where the money goes</h3>
+            <div id="ai-categories"></div>
+
+            <!-- Budget sensitivity slider -->
+            <h3 class="card__title" style="margin:16px 0 8px">Budget sensitivity</h3>
+            <div class="field">
+              <label for="ai-budget-slider">Pooled per-person budget</label>
+              <input id="ai-budget-slider" type="range" min="1200" max="5000" step="100" value="3000" aria-describedby="ai-budget-out" />
+              <div style="display:flex;justify-content:space-between">
+                <span class="hint">₹1,200</span>
+                <strong id="ai-budget-out" style="font-family:var(--font-numeric)">₹3,000</strong>
+                <span class="hint">₹5,000</span>
+              </div>
+            </div>
+
+            <!-- Sensitivity: what-if toggles -->
+            <div class="field">
+              <span class="hint" style="font-weight:600;color:var(--wp-ink)">What if…</span>
+              <div id="ai-scenarios" class="subset-picker"></div>
+            </div>
+
+            <!-- Recommendation -->
+            <div id="ai-recommendation" style="margin-top:16px"></div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <nav class="tabbar" aria-label="Primary">

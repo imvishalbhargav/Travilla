@@ -196,6 +196,29 @@ window.TripCollabData = (function () {
     { id: "lc7", label: "Local SIM + data (foreign travellers)", type: "sim", amount: 25, currency: "EUR", payer: "m3", split: { rule: "subset", participants: ["m3", "m4"] } },
   ];
 
+  // Budget intelligence config (Milestone 5). Budget is INR/person pooled
+  // capacity. Categories weight the plan-level budget so the AI can say
+  // which area is over/under and what to trim first. All illustrative; no live data.
+  const budgetConfig = {
+    perPerson: 3000, // pooled capacity per person (INR)
+    categories: {
+      "Stay": { weight: 0.25, icon: "i-hotel" },
+      "Transport": { weight: 0.45, icon: "i-train" },
+      "Food": { weight: 0.12, icon: "i-food" },
+      "Guides & experiences": { weight: 0.12, icon: "i-guide" },
+      "Connectivity & misc": { weight: 0.06, icon: "i-sim" },
+    },
+  };
+
+  // Map a cost type -> budget category (for the AI analyser).
+  const typeCategory = {
+    hotel: "Stay",
+    train: "Transport", plane: "Transport", cab: "Transport",
+    food: "Food",
+    guide: "Guides & experiences", discover: "Guides & experiences",
+    sim: "Connectivity & misc",
+  };
+
   // Foreign-traveller assistance cards.
   const assistance = [
     { icon: "i-sim", title: "Local SIM made easy", text: "Get a working Indian SIM for calls & data — arranged before you land." },
@@ -204,5 +227,5 @@ window.TripCollabData = (function () {
     { icon: "i-verify", title: "Verified human help", text: "A real, verified local person to help if anything goes wrong." },
   ];
 
-  return { group, trip, budgetCollab, places, guides, assistance, candidates, matchWeights, tripTotal, costs, currencies, IMG };
+  return { group, trip, budgetCollab, places, guides, assistance, candidates, matchWeights, tripTotal, costs, currencies, budgetConfig, typeCategory, IMG };
 })();

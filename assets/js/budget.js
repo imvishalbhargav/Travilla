@@ -189,43 +189,145 @@
     if (btn) btn.addEventListener("click", function () { btn.innerHTML = TC.icon("i-check", "icon") + " All settled"; btn.disabled = true; btn.classList.add("btn--secondary"); });
   }
 
-  /* ---- render: AI budget advisement (explainable) ---- */
-  function renderAi() {
-    const el = document.getElementById("ai-budget");
-    if (!el) return;
+  /* ============================================================
+     AI budget analyser (Milestone 5)
+     - Category breakdown vs allocated budget
+     - Feasibility status
+     - Budget sensitivity (slider + what-if toggles)
+     - Recommendation: alternatives/cuts FIRST, then explicit increase
+     ============================================================ */
+  let aiScenarios = {}; // id -> bool (enabled what-if)
+
+  // Sum a cost line's plan-level amount into its budget category (INR).
+  function categoryTotals() {
+    const totals = {};
+    Object.keys(D.budgetConfig.categories).forEach(function (k) { totals[k] = 0; });
+    state.costs.forEach(function (c) {
+      const cat = D.typeCategory[c.type] || "Guides & experiences";
+      totals[cat] += toINR(c.amount, c.currency);
+    });
+    return totals;
+  }
+
+  // Apply enabled what-if scenarios and re-sort + return adjusted totals.
+  function adjustedTotals(base) {
+    const t = Object.assign({}, base);
+    if (aiScenarios.dropFlight) t.Transport -= 3600;   // return flight (INR)
+    if (aiScenarios.hostelStay) { t.Transport -= 600; t.Transport += 3000; t["Stay"] = 2000; } // 2-room guesthouse
+    if (aiScenarios.dropGuide) t["Guides & experiences"] -= 700;
+    if (aiScenarios.carpool) t.Transport -= 400;
+    Object.keys(t).forEach(function (k) { if (t[k] < 0) t[k] = 0; });
+    return t;
+  }
+
+  function planPerPerson() { return totalConsumed() / D.group.length; }
+
+  function renderAiAnalyzer() {
+    const statusEl = document.getElementById("ai-status");
+    const catEl = document.getElementById("ai-categories");
+    const recEl = document.getElementById("ai-recommendation");
+    if (!statusEl || !catEl || !recEl) return;
+
+    const budget = Number(document.getElementById("ai-budget-slider").value) || D.budgetConfig.perPerson;
     const total = totalConsumed();
     const perPerson = total / D.group.length;
-    const budget = 3000; // ₹/person pooled capacity
+    const planBudget = budget * D.group.length; // plan-level allocated budget
+    const feasibility = perPerson <= budget;
+
+    // Status
     const short = Math.max(0, perPerson - budget);
+    statusEl.innerHTML =
+      '<div class="section__head" style="margin:0 0 4px">' +
+        '<span class="card__title">' + (feasibility ? "Feasible" : "Over budget") + "</span>" +
+        (feasibility
+          ? '<span class="pill pill--verify">' + TC.icon("i-check", "icon") + " Feasible</span>"
+          : '<span class="pill pill--amber">' + TC.icon("i-arrow") + " Over by " + fmt(short) + "/person</span>") +
+      "</div>" +
+      '<p class="card__meta">Plan: ' + fmt(perPerson) + '/person vs ' + fmt(budget) + '/person pooled budget · ' + D.group.length + " travellers</p>" +
+      '<div style="height:10px;background:var(--wp-surface-2);border-radius:10px;overflow:hidden;margin:10px 0">' +
+        '<div style="width:' + Math.min(100, Math.round((perPerson / budget) * 100)) + '%;height:100%;background:' + (feasibility ? "var(--wp-verify)" : "var(--wp-amber)") + ';border-radius:10px;transition:width 300ms var(--ease-out)"></div>' +
+      "</div>";
+
+    // Category breakdown
+    const totals = adjustedTotals(categoryTotals());
+    const catRows = Object.keys(D.budgetConfig.categories)
+      .map(function (cat) {
+        const cfg = D.budgetConfig.categories[cat];
+        const spent = totals[cat];
+        const allocated = planBudget * cfg.weight;
+        const pct = Math.min(100, Math.round((spent / (allocated || 1)) * 100));
+        const over = spent > allocated;
+        return (
+          '<div style="margin-bottom:12px">' +
+            '<div style="display:flex;justify-content:space-between;align-items:center;font-size:var(--tp-body-sm)">' +
+              '<span style="font-weight:600;display:inline-flex;align-items:center;gap:6px">' + TC.icon(cfg.icon) + " " + cat + "</span>" +
+              '<span style="font-family:var(--font-numeric)">' + fmt(spent) + " / " + fmt(allocated) + "</span>" +
+            "</div>" +
+            '<div style="height:6px;background:var(--wp-surface-2);border-radius:6px;overflow:hidden;margin-top:6px">' +
+              '<div style="width:' + pct + '%;height:100%;background:' + (over ? "var(--wp-amber)" : "var(--wp-waypoint)") + ';border-radius:6px;transition:width 300ms var(--ease-out)"></div>' +
+            "</div>" +
+            (over ? '<div class="card__meta" style="color:var(--wp-amber-deep)">Over by ' + fmt(spent - allocated) + "</div>" : "") +
+          "</div>"
+        );
+      })
+      .join("");
+    catEl.innerHTML = catRows;
+
+    // Recommendation: explainable. Alternatives/cuts first, then increase.
+    recEl.innerHTML = buildRecommendation(budget, perPerson, totals);
+  }
+
+  function buildRecommendation(budget, perPerson, totals) {
+    const short = Math.max(0, perPerson - budget);
+    // Find the category most over its allocation.
+    const planBudget = budget * D.group.length;
+    let worst = null;
+    Object.keys(D.budgetConfig.categories).forEach(function (cat) {
+      const spent = totals[cat];
+      const allocated = planBudget * D.budgetConfig.categories[cat].weight;
+      if (spent > allocated) {
+        const diff = spent - allocated;
+        if (!worst || diff > worst.diff) worst = { cat: cat, diff: diff, spent: spent };
+      }
+    });
+
+    let html = '<div class="card" style="background:var(--wp-amber-soft);border-color:transparent">' +
+      '<div class="card__body"><b>AI recommendation</b><div style="margin-top:8px">';
+
+    if (short <= 0) {
+      const room = budget - perPerson;
+      html += '<p style="margin:0 0 6px;color:var(--wp-ink)">✅ You are <b>within budget</b> with <b>' + fmt(room) + '/person</b> of headroom. Add a cultural experience or upgrade the stay, or keep the extra as a buffer.</p>';
+    } else {
+      html += '<p style="margin:0 0 6px;color:var(--wp-ink)">The trip is <b>' + fmt(short) + '/person over</b>. Best next steps, in order:</p>';
+      html += "<ol style=\"margin:0 0 6px;padding-left:1.1rem;color:var(--wp-ink)\">";
+      const suggested = [];
+      if (aiScenarios.dropFlight) suggested.push("Return flight removed (saves " + fmt(3600) + " total).");
+      if (worst && worst.cat === "Transport") suggested.push("Swap the return flight for the train again (saves " + fmt(3600) + ").");
+      if (totals["Stay"] > planBudget * D.budgetConfig.categories["Stay"].weight) suggested.push("Move to a twin guesthouse instead of the cottage (saves " + fmt(400) + ").");
+      if (worst && worst.cat === "Guides & experiences" && worst.diff > 0) suggested.push("Keep the planned guide but drop the jeep to a shared shuttle (saves " + fmt(400) + ").");
+      if (!suggested.length) suggested.push("Recheck the two largest lines — " + "flight and stay — for cheaper dates or a smaller room.");
+      suggested.forEach(function (s) { html += "<li>" + s + "</li>"; });
+      html += "</ol>";
+      html += '<p style="margin:6px 0 0;color:var(--wp-ink)"><b>Or, keep everything</b> and raise the pooled budget by <b>' + fmt(short) + '/person</b> (to ' + fmt(perPerson) + '/person). ' + fmt(D.group.length) + " travellers → " + fmt(short * D.group.length) + " total.</p>";
+    }
+
+    html += "</div></div></div>";
+    return html;
+  }
+
+  /* ---- render: legacy single-line AI check (kept for bottom summary) ---- */
+  function renderAiLegacy() {
+    const el = document.getElementById("ai-budget");
+    if (!el) return;
+    const perPerson = totalConsumed() / D.group.length;
+    const budget = D.budgetConfig.perPerson;
     const feasibility = perPerson <= budget ? "Feasible" : "Over";
     const pill = feasibility === "Feasible"
       ? '<span class="pill pill--verify">' + TC.icon("i-check", "icon") + " Feasible</span>"
       : '<span class="pill pill--amber">Over budget</span>';
-
-    // Find the largest single cost to suggest a concrete cut.
-    let biggest = null;
-    state.costs.forEach(function (c) {
-      const amt = toINR(c.amount, c.currency);
-      if (!biggest || amt > biggest.amt) biggest = { label: c.label, amt: amt };
-    });
-    const rec = feasibility === "Over"
-      ? "Raise per-person budget by " + fmt(short) + " (to " + fmt(perPerson) + "), OR drop the largest line (" + fmt(biggest.amt) + " for " + biggest.label + ")."
-      : "You're within budget with " + fmt(budget - perPerson) + "/person of room to add a cultural experience or a better stay.";
-
     el.innerHTML =
-      '<div class="section__head"><h2 class="section__title">AI budget check</h2>' + pill + "</div>" +
-      '<div class="card" style="border-color:var(--wp-waypoint)">' +
-        '<div class="card__body">' +
-          '<p class="card__meta">Plan: ' + fmt(perPerson) + '/person · Pooled budget: ' + fmt(budget) + '/person</p>' +
-          '<div style="font-family:var(--font-numeric);font-size:1.25rem;font-weight:700;margin:8px 0 4px">' + feasibility + " — " + (feasibility === "Over" ? fmt(short) + " over per person" : "on track") + "</div>" +
-          '<div style="height:8px;background:var(--wp-surface-2);border-radius:8px;overflow:hidden;margin:12px 0">' +
-            '<div style="width:' + Math.min(100, Math.round((perPerson / budget) * 100)) + '%;height:100%;background:' + (feasibility === "Over" ? "var(--wp-amber)" : "var(--wp-verify)") + ';border-radius:8px"></div>' +
-          "</div>" +
-          '<div class="card" style="margin-top:16px;background:var(--wp-amber-soft);border-color:transparent">' +
-            '<div class="card__body"><b>Recommendation</b><p style="margin:6px 0 0;color:var(--wp-ink)">' + rec + "</p></div>" +
-          "</div>" +
-        "</div>" +
-      "</div>";
+      '<div class="section__head"><h2 class="section__title">Quick check</h2>' + pill + "</div>" +
+      '<p class="card__meta">Plan ' + fmt(perPerson) + '/person vs pooled ' + fmt(budget) + '/person.</p>';
   }
 
   /* ---- add cost form ---- */
@@ -277,11 +379,30 @@
   }
 
   /* ---- bind ---- */
-  function renderAll() { renderSummary(); renderLedger(); renderCostLines(); renderSettle(); renderAi(); }
+  function renderAll() { renderSummary(); renderLedger(); renderCostLines(); renderSettle(); renderAiAnalyzer(); renderAiLegacy(); }
+
+  // Render the what-if scenario chips (independent of cost changes).
+  function renderScenarios() {
+    const el = document.getElementById("ai-scenarios");
+    if (!el) return;
+    const items = [
+      { id: "dropFlight", label: "Skip return flight · take train" },
+      { id: "hostelStay", label: "Swap cottage → twin guesthouse" },
+      { id: "dropGuide", label: "Self-guide the waterfall" },
+      { id: "carpool", label: "Carpool instead of jeep" },
+    ];
+    el.innerHTML = items
+      .map(function (s) {
+        const checked = aiScenarios[s.id] ? " checked" : "";
+        return '<label class="sub-option"><input type="checkbox" value="' + s.id + '"' + checked + " /> " + s.label + "</label>";
+      })
+      .join("");
+  }
 
   document.addEventListener("DOMContentLoaded", function () {
     renderAddPayer();
     renderSubsetPicker();
+    renderScenarios();
     renderAll();
 
     const cur = document.getElementById("currency");
@@ -296,7 +417,19 @@
     if (rule) rule.addEventListener("change", function () { toggleSubset(rule.value === "subset"); });
     const save = document.getElementById("save-cost");
     if (save) save.addEventListener("click", saveCost);
-    const close = document.getElementById("add-cost-btn");
+
+    const slider = document.getElementById("ai-budget-slider");
+    if (slider) {
+      const out = document.getElementById("ai-budget-out");
+      const upd = function () { out.textContent = TC.inr(slider.value); renderAiAnalyzer(); };
+      slider.addEventListener("input", upd);
+      upd();
+    }
+    const scen = document.getElementById("ai-scenarios");
+    if (scen) scen.addEventListener("change", function (e) {
+      const cb = e.target.closest("input[type=checkbox]");
+      if (cb) { aiScenarios[cb.value] = cb.checked; renderAiAnalyzer(); }
+    });
   });
 
   // expose for tests
