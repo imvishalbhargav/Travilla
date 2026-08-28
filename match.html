@@ -30,41 +30,45 @@
       <section class="welcome fade-up">
         <p class="welcome__kicker">Match</p>
         <h1 class="welcome__title">Find the group you actually click with.</h1>
-        <p class="welcome__sub">We match travellers by interests, budget, pace and language — then pool budgets so the trip is possible.</p>
+        <p class="welcome__sub">We score travellers on budget, pace, interests, language and dates — then pool budgets so the trip becomes possible.</p>
       </section>
 
-      <!-- Signature Budget-Collab moment -->
-      <section class="section" id="match-collab"></section>
-
+      <!-- Mode toggle -->
       <section class="section">
-        <div class="section__head">
-          <h2 class="section__title">Compatibility score</h2>
-          <a class="section__link" href="budget.html">Budget</a>
-        </div>
-        <div class="card">
-          <div class="card__body" id="compat"></div>
-        </div>
+        <nav class="tabs" aria-label="Match mode" id="mode-tabs">
+          <a href="#" data-mode="assemble" aria-selected="true">Assemble a group</a>
+          <a href="#" data-mode="join" aria-selected="false">Join a trip</a>
+        </nav>
       </section>
 
-      <section class="section">
-        <div class="section__head">
-          <h2 class="section__title">Suggested group</h2>
-        </div>
-        <div class="card">
-          <div class="card__body" id="match-group"></div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section__head">
-          <h2 class="section__title">Your travel preferences</h2>
-        </div>
+      <!-- Route / trip inputs -->
+      <section class="section" id="route-section">
         <div class="card">
           <div class="card__body">
+            <h2 class="section__title" style="margin-bottom:12px" id="route-title">Build a group for a route</h2>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <div class="field"><label for="from">From</label><input id="from" type="text" value="Jaipur" /></div>
+              <div class="field"><label for="to">To</label><input id="to" type="text" value="Goa" /></div>
+            </div>
+            <div class="field"><label for="dates">Dates</label><input id="dates" type="text" value="14–18 Dec" /></div>
+            <p class="card__meta" id="route-hint">We'll match you with travellers who fit this trip.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Preferences -->
+      <section class="section">
+        <div class="card">
+          <div class="card__body">
+            <h2 class="section__title" style="margin-bottom:12px">Your travel preferences</h2>
             <div class="field">
               <label for="budget">Trip budget (per person)</label>
-              <input id="budget" type="number" inputmode="numeric" value="1500" min="0" step="100" />
-              <span class="hint">We use this to find compatible groups and pool budgets.</span>
+              <input id="budget" type="range" min="800" max="4000" step="100" value="1500" aria-describedby="budget-out" />
+              <div style="display:flex;justify-content:space-between">
+                <span class="hint">₹800</span>
+                <strong id="budget-out" style="font-family:var(--font-numeric)">₹1,500</strong>
+                <span class="hint">₹4,000</span>
+              </div>
             </div>
             <div class="field">
               <label for="pace">Travel pace</label>
@@ -76,14 +80,32 @@
             </div>
             <div class="field">
               <label for="interests">Interests</label>
-              <select id="interests" multiple size="3" aria-describedby="interests-hint">
+              <select id="interests" multiple size="4" aria-describedby="interests-hint">
                 <option selected>Hidden gems</option>
                 <option selected>Local food</option>
+                <option selected>Culture & history</option>
                 <option>Beaches</option>
-                <option>Culture & history</option>
                 <option>Hiking</option>
               </select>
               <span class="hint" id="interests-hint">Ctrl/Cmd-click to pick more than one.</span>
+            </div>
+            <div class="field">
+              <label for="language">I speak</label>
+              <select id="language">
+                <option selected>English</option>
+                <option>Hindi</option>
+                <option>中文</option>
+                <option>Español</option>
+                <option>Deutsch</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="dateflex">Date flexibility</label>
+              <select id="dateflex">
+                <option selected>Flexible</option>
+                <option>Somewhat</option>
+                <option>Fixed</option>
+              </select>
             </div>
           </div>
         </div>
@@ -94,6 +116,28 @@
           <svg data-icon="i-match" aria-hidden="true"></svg> Find my compatible group
         </button>
       </section>
+
+      <!-- Results -->
+      <section class="section" id="results" hidden>
+        <div class="section__head">
+          <h2 class="section__title">Compatible travellers</h2>
+          <a class="section__link" href="budget.html">Budget</a>
+        </div>
+        <div id="results-list" aria-live="polite"></div>
+      </section>
+
+      <!-- Dynamic Budget-Collab -->
+      <section class="section" id="pool-section">
+        <div class="section__head">
+          <h2 class="section__title">Pool budgets — travel is possible together</h2>
+        </div>
+        <div class="card">
+          <div class="card__body" id="pool-calc"></div>
+        </div>
+      </section>
+
+      <!-- Signature Budget-Collab moment (animated) -->
+      <section class="section" id="match-collab"></section>
     </main>
 
     <nav class="tabbar" aria-label="Primary">

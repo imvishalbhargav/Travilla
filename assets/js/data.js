@@ -123,6 +123,60 @@ window.TripCollabData = (function () {
     },
   ];
 
+  // Candidate pool for compatible-group matching (Milestone 3).
+  // Each has preferences used by the scoring engine. Avatars are initials (no AI faces).
+  const candidates = [
+    {
+      id: "c1", name: "Arjun", initials: "AR", color: "#1E7F8C", city: "Delhi",
+      tagline: "Off-beat trail & street-food hunter", verified: true, language: ["English", "Hindi"],
+      prefs: { budget: 1500, pace: "Balanced", interests: ["Hidden gems", "Local food", "Hiking"], style: "Adventure", dateFlex: "Flexible", accessibility: "None" },
+    },
+    {
+      id: "c2", name: "Lena", initials: "LE", color: "#B9770E", city: "Berlin",
+      tagline: "First time in India — wants authentic, safe", verified: true, language: ["English", "German"],
+      prefs: { budget: 1600, pace: "Balanced", interests: ["Culture & history", "Hidden gems"], style: "Culture", dateFlex: "Somewhat", accessibility: "Step-free preferred" },
+    },
+    {
+      id: "c3", name: "Kabir", initials: "KA", color: "#2E7D4F", city: "Jaipur",
+      tagline: "Local who knows the quiet places", verified: true, language: ["Hindi", "English"],
+      prefs: { budget: 1500, pace: "Slow & relaxed", interests: ["Hidden gems", "Local food"], style: "Relaxed", dateFlex: "Flexible", accessibility: "None" },
+    },
+    {
+      id: "c4", name: "Mira", initials: "MI", color: "#7C5CBF", city: "Mumbai",
+      tagline: "Budget-savvy, loves waterfalls & treks", verified: true, language: ["English", "Hindi", "Marathi"],
+      prefs: { budget: 1400, pace: "Packed itinerary", interests: ["Hiking", "Hidden gems", "Beaches"], style: "Adventure", dateFlex: "Flexible", accessibility: "None" },
+    },
+    {
+      id: "c5", name: "Tom", initials: "TO", color: "#3A5059", city: "London",
+      tagline: "Culture + photography, slow travel", verified: false, language: ["English"],
+      prefs: { budget: 2000, pace: "Slow & relaxed", interests: ["Culture & history", "Local food"], style: "Culture", dateFlex: "Somewhat", accessibility: "None" },
+    },
+    {
+      id: "c6", name: "Sara", initials: "SA", color: "#8A5A2B", city: "Bengaluru",
+      tagline: "Weekend explorer, budget-first", verified: true, language: ["English", "Kannada", "Hindi"],
+      prefs: { budget: 1500, pace: "Packed itinerary", interests: ["Beaches", "Local food", "Hidden gems"], style: "Friends", dateFlex: "Fixed", accessibility: "None" },
+    },
+  ];
+
+  // Compatibility dimension weights (sum to 1). Used by the scoring engine.
+  const matchWeights = {
+    budget: 0.28,   // does the budget align?
+    pace: 0.18,
+    interests: 0.26,
+    language: 0.14,
+    style: 0.09,
+    dateFlex: 0.05,
+  };
+
+  // Total cost of the active Goa trip (for feasibility checks).
+  function tripTotal() {
+    let sum = 0;
+    trip.days.forEach(function (day) {
+      day.items.forEach(function (it) { sum += Number(it.cost) || 0; });
+    });
+    return sum;
+  }
+
   // Foreign-traveller assistance cards.
   const assistance = [
     { icon: "i-sim", title: "Local SIM made easy", text: "Get a working Indian SIM for calls & data — arranged before you land." },
@@ -131,5 +185,5 @@ window.TripCollabData = (function () {
     { icon: "i-verify", title: "Verified human help", text: "A real, verified local person to help if anything goes wrong." },
   ];
 
-  return { group, trip, budgetCollab, places, guides, assistance, IMG };
+  return { group, trip, budgetCollab, places, guides, assistance, candidates, matchWeights, tripTotal, IMG };
 })();

@@ -152,6 +152,53 @@
 .empty h3 { font: var(--tp-h2); color: var(--wp-ink); margin-bottom: 0.25rem; }
 .empty p { font-size: var(--tp-body-sm); max-width: 32ch; margin: 0 auto; }
 
+/* ---- Score ring (compatibility) ---- */
+.score-ring {
+  --ring: var(--wp-waypoint);
+  --val: 50;
+  width: 68px; height: 68px; flex: none;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: conic-gradient(var(--ring) calc(var(--val) * 1%), var(--wp-surface-2) 0);
+  position: relative;
+}
+.score-ring::before {
+  content: ""; position: absolute; inset: 5px; border-radius: 50%; background: var(--wp-surface);
+}
+.score-ring span {
+  position: relative; font: 600 0.9375rem/1 var(--font-numeric); color: var(--wp-ink);
+}
+
+/* ---- Budget-Collab animated wayline ---- */
+.bc__wayline {
+  position: relative; height: 60px; margin: -6px 0 4px;
+}
+.bc__wayline svg { width: 100%; height: 100%; }
+.wl-draw {
+  stroke-dasharray: 320;
+  stroke-dashoffset: 320;
+  animation: wlDraw 1.6s var(--ease-out) 0.2s forwards;
+}
+@keyframes wlDraw { to { stroke-dashoffset: 0; } }
+.bc__dot {
+  position: absolute; top: 30px; width: 10px; height: 10px; border-radius: 50%;
+  background: var(--wp-waypoint); transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 4px var(--wp-waypoint-soft);
+}
+.bc__spark {
+  position: absolute; top: 30px; left: 50%; transform: translate(-50%, -54%);
+  width: 1.5rem; height: 1.5rem; display: inline-flex; align-items: center; justify-content: center;
+  color: var(--wp-verify); background: var(--wp-surface); border-radius: 50%;
+  box-shadow: 0 0 0 3px var(--wp-verify-soft);
+  scale: 0; animation: sparkPop 0.4s var(--ease-out) 1.7s forwards;
+}
+@keyframes sparkPop { to { scale: 1; } }
+.bc.bc--pooled { animation: poolGlow 1.2s var(--ease-out); }
+@keyframes poolGlow {
+  0% { box-shadow: 0 0 0 0 var(--wp-waypoint); }
+  100% { box-shadow: 0 0 0 18px rgba(14,124,134,0); }
+}
+
 /* ---- Comments ---- */
 .comment { display: flex; gap: 0.75rem; margin-bottom: var(--sp-3); }
 .comment__avatar {
