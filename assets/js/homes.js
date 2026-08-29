@@ -69,6 +69,8 @@
     const grid = document.getElementById("quick-grid");
     if (!grid) return;
     const items = [
+      { icon: "i-map", title: "Travel guides", sub: "Browse curated itineraries", href: "guides.html", cta: "Explore" },
+      { icon: "i-plus", title: "Create with AI", sub: "Generate a trip in seconds", href: "create.html", cta: "Start" },
       { icon: "i-train", title: "Book transport", sub: "Flights, trains, buses & cabs", href: "transport.html", cta: "Book" },
       { icon: "i-hotel", title: "Book a stay", sub: "Real, reviewed properties", href: "hotels.html", cta: "Book" },
       { icon: "i-guide", title: "Verified local guides", sub: "Hidden gems, real people", href: "discover.html", cta: "Find" },

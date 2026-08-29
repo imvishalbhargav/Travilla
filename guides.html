@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="TripCollab Guides — browse and create curated, AI-assisted travel guides and itineraries across India." />
+  <title>Guides · TripCollab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="assets/css/tokens.css?v=10" />
+  <link rel="stylesheet" href="assets/css/base.css?v=10" />
+  <link rel="stylesheet" href="assets/css/components.css?v=10" />
+  <link rel="stylesheet" href="assets/css/screens.css?v=10" />
+</head>
+<body data-nav="guides">
+  <header class="topbar">
+    <span class="topbar__brand">TripCollab</span>
+    <nav aria-label="Primary">
+      <a data-nav="trips" href="index.html">Trips</a>
+      <a data-nav="guides" href="guides.html" aria-current="page">Guides</a>
+      <a data-nav="discover" href="discover.html">Discover</a>
+      <a data-nav="transport" href="transport.html">Transport</a>
+      <a data-nav="match" href="match.html">Match</a>
+      <a data-nav="budget" href="budget.html">Budget</a>
+      <a data-nav="profile" href="profile.html">Profile</a>
+    </nav>
+  </header>
+
+  <div class="shell">
+    <main class="main" id="main">
+      <!-- Guides hero -->
+      <section class="hero-cinema fade-up">
+        <img src="assets/img/dest-ladakh.jpg" alt="Travel guides across India" fetchpriority="high" decoding="async" />
+        <div class="hero-cinema__scrim"></div>
+        <div class="hero-cinema__content">
+          <p class="hero-cinema__kicker">Plan together · Pay together · Go together</p>
+          <h1 class="hero-cinema__title">Explore travel guides & itineraries.</h1>
+          <p class="hero-cinema__sub">Real, curated trips across India — or let the AI copilot build one for your group and budget.</p>
+          <div class="hero-cinema__actions">
+            <a class="btn btn--glass" href="create.html"><svg data-icon="i-plus" aria-hidden="true"></svg> Create with AI</a>
+            <a class="btn btn--primary" href="transport.html"><svg data-icon="i-train" aria-hidden="true"></svg> Book transport</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Popular destinations -->
+      <section class="section">
+        <div class="section__head"><h2 class="section__title">Popular destinations</h2></div>
+        <nav class="tabs" id="dest-filter" aria-label="Filter guides by destination"></nav>
+      </section>
+
+      <!-- Guides grid -->
+      <section class="section">
+        <div class="section__head">
+          <h2 class="section__title">Recent guides</h2>
+          <span class="pill pill--waypoint" id="guide-count">0 guides</span>
+        </div>
+        <div class="grid" id="guide-grid"></div>
+      </section>
+
+      <!-- Create CTA -->
+      <section class="section">
+        <div class="card" style="border-color:var(--wp-waypoint)">
+          <div class="card__body" style="text-align:center">
+            <h2 class="section__title" style="margin:0 0 4px">Build your own trip in seconds</h2>
+            <p class="card__meta" style="margin:4px 0 12px">The AI copilot turns destination + days + budget + interests into a full itinerary and shared-cost plan.</p>
+            <a class="btn btn--primary" href="create.html"><svg data-icon="i-plus" aria-hidden="true"></svg> Start a trip</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="tabbar" aria-label="Primary">
+      <a data-nav="trips" href="index.html"><svg class="icon" data-icon="i-trip" aria-hidden="true"></svg><span>Trips</span></a>
+      <a data-nav="guides" href="guides.html" aria-current="page"><svg class="icon" data-icon="i-map" aria-hidden="true"></svg><span>Guides</span></a>
+      <a data-nav="discover" href="discover.html"><svg class="icon" data-icon="i-discover" aria-hidden="true"></svg><span>Discover</span></a>
+      <a data-nav="match" href="match.html"><svg class="icon" data-icon="i-match" aria-hidden="true"></svg><span>Match</span></a>
+      <a data-nav="budget" href="budget.html"><svg class="icon" data-icon="i-budget" aria-hidden="true"></svg><span>Budget</span></a>
+      <a data-nav="profile" href="profile.html"><svg class="icon" data-icon="i-profile" aria-hidden="true"></svg><span>Profile</span></a>
+    </nav>
+  </div>
+
+  <script src="assets/js/font.js?v=10"></script>
+  <script src="assets/js/data.js?v=10"></script>
+  <script src="assets/js/app.js?v=10"></script>
+  <script src="assets/js/store.js?v=10"></script>
+  <script src="assets/js/ai-data.js?v=10"></script>
+  <script src="assets/js/guides.js?v=10"></script>
+</body>
+</html>

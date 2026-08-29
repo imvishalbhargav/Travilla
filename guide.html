@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="description" content="TripCollab — book buses, flights, trains and cabs for your group trip." />
-  <title>Transport · TripCollab</title>
+  <meta name="description" content="TripCollab — a curated travel guide and itinerary, with budget-collab and AI-assisted planning." />
+  <title>Guide · TripCollab</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="assets/css/tokens.css?v=10" />
@@ -12,14 +12,14 @@
   <link rel="stylesheet" href="assets/css/components.css?v=10" />
   <link rel="stylesheet" href="assets/css/screens.css?v=10" />
 </head>
-<body data-nav="transport">
+<body data-nav="guides">
   <header class="topbar">
     <span class="topbar__brand">TripCollab</span>
     <nav aria-label="Primary">
       <a data-nav="trips" href="index.html">Trips</a>
       <a data-nav="guides" href="guides.html">Guides</a>
       <a data-nav="discover" href="discover.html">Discover</a>
-      <a data-nav="transport" href="transport.html" aria-current="page">Transport</a>
+      <a data-nav="transport" href="transport.html">Transport</a>
       <a data-nav="match" href="match.html">Match</a>
       <a data-nav="budget" href="budget.html">Budget</a>
       <a data-nav="profile" href="profile.html">Profile</a>
@@ -27,41 +27,18 @@
   </header>
 
   <div class="shell">
-    <a class="btn btn--ghost" href="discover.html" aria-label="Back to discover" style="margin-top:12px">
-      <svg data-icon="i-arrow" class="icon" style="transform:scaleX(-1)" aria-hidden="true"></svg> Discover
+    <a class="btn btn--ghost" href="guides.html" aria-label="Back to guides" style="margin-top:12px">
+      <svg data-icon="i-arrow" class="icon" style="transform:scaleX(-1)" aria-hidden="true"></svg> Guides
     </a>
 
     <main class="main" id="main">
-      <div class="toast" id="transport-toast" role="status" aria-live="polite" hidden></div>
-
-      <section class="welcome fade-up">
-        <p class="welcome__kicker">Transport</p>
-        <h1 class="welcome__title">Book the group's travel.</h1>
-        <p class="welcome__sub">Buses, flights, trains and cabs — compare and book, straight into your shared cost & itinerary.</p>
-      </section>
-
-      <!-- Mode tabs -->
-      <section class="section">
-        <nav class="tabs" aria-label="Transport mode" id="mode-tabs">
-          <a href="#" data-mode="flight" aria-selected="false"><svg class="icon" data-icon="i-plane" aria-hidden="true"></svg> Flights</a>
-          <a href="#" data-mode="train" aria-selected="true"><svg class="icon" data-icon="i-train" aria-hidden="true"></svg> Trains</a>
-          <a href="#" data-mode="bus" aria-selected="false"><svg class="icon" data-icon="i-cab" aria-hidden="true"></svg> Buses</a>
-          <a href="#" data-mode="cab" aria-selected="false"><svg class="icon" data-icon="i-cab" aria-hidden="true"></svg> Cabs</a>
-        </nav>
-      </section>
-
-      <!-- Results -->
-      <section class="section">
-        <div class="section__head">
-          <h2 class="section__title" id="mode-title">Trains</h2>
-          <span class="pill pill--waypoint" id="mode-count">3 options</span>
-        </div>
-        <div id="transport-list"></div>
-      </section>
+      <div class="toast" id="guide-toast" role="status" aria-live="polite" hidden></div>
+      <div id="guide-detail"></div>
     </main>
 
     <nav class="tabbar" aria-label="Primary">
       <a data-nav="trips" href="index.html"><svg class="icon" data-icon="i-trip" aria-hidden="true"></svg><span>Trips</span></a>
+      <a data-nav="guides" href="guides.html" aria-current="page"><svg class="icon" data-icon="i-map" aria-hidden="true"></svg><span>Guides</span></a>
       <a data-nav="discover" href="discover.html"><svg class="icon" data-icon="i-discover" aria-hidden="true"></svg><span>Discover</span></a>
       <a data-nav="match" href="match.html"><svg class="icon" data-icon="i-match" aria-hidden="true"></svg><span>Match</span></a>
       <a data-nav="budget" href="budget.html"><svg class="icon" data-icon="i-budget" aria-hidden="true"></svg><span>Budget</span></a>
@@ -70,9 +47,11 @@
   </div>
 
   <script src="assets/js/font.js?v=10"></script>
-<script src="assets/js/data.js?v=10"></script>
+  <script src="assets/js/data.js?v=10"></script>
   <script src="assets/js/app.js?v=10"></script>
   <script src="assets/js/store.js?v=10"></script>
-  <script src="assets/js/transport.js?v=10"></script>
+  <script src="assets/js/ai-data.js?v=10"></script>
+  <script src="assets/js/ai.js?v=10"></script>
+  <script src="assets/js/guide.js?v=10"></script>
 </body>
 </html>

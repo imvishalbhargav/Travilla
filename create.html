@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="TripCollab — build a curated trip with the AI copilot, then push it into your shared budget & itinerary." />
+  <title>Create trip · TripCollab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="assets/css/tokens.css?v=10" />
+  <link rel="stylesheet" href="assets/css/base.css?v=10" />
+  <link rel="stylesheet" href="assets/css/components.css?v=10" />
+  <link rel="stylesheet" href="assets/css/screens.css?v=10" />
+</head>
+<body data-nav="guides">
+  <header class="topbar">
+    <span class="topbar__brand">TripCollab</span>
+    <nav aria-label="Primary">
+      <a data-nav="trips" href="index.html">Trips</a>
+      <a data-nav="guides" href="guides.html">Guides</a>
+      <a data-nav="discover" href="discover.html">Discover</a>
+      <a data-nav="transport" href="transport.html">Transport</a>
+      <a data-nav="match" href="match.html">Match</a>
+      <a data-nav="budget" href="budget.html">Budget</a>
+      <a data-nav="profile" href="profile.html">Profile</a>
+    </nav>
+  </header>
+
+  <div class="shell">
+    <a class="btn btn--ghost" href="guides.html" aria-label="Back to guides" style="margin-top:12px">
+      <svg data-icon="i-arrow" class="icon" style="transform:scaleX(-1)" aria-hidden="true"></svg> Guides
+    </a>
+
+    <main class="main" id="main">
+      <div class="toast" id="create-toast" role="status" aria-live="polite" hidden></div>
+
+      <section class="welcome fade-up">
+        <p class="welcome__kicker">Create with AI</p>
+        <h1 class="welcome__title">Build a trip in seconds.</h1>
+        <p class="welcome__sub">Tell the copilot where and how long — it maps a day-by-day itinerary with a real, shareable budget. Powered locally, no key needed, and you can connect a real LLM later.</p>
+      </section>
+
+      <!-- FORM -->
+      <section class="section">
+        <div class="card">
+          <div class="card__body">
+            <div class="field">
+              <label for="cr-name">Trip title (optional)</label>
+              <input id="cr-name" type="text" placeholder="e.g. Kerala Backwaters & Spice Hills" />
+            </div>
+
+            <div class="field">
+              <label for="cr-dest">Where to?</label>
+              <select id="cr-dest" class="select"></select>
+            </div>
+
+            <div class="grid-two">
+              <div class="field">
+                <label for="cr-days">Days</label>
+                <input id="cr-days" type="number" min="1" max="7" value="4" inputmode="numeric" />
+              </div>
+              <div class="field">
+                <label for="cr-group">Travellers</label>
+                <input id="cr-group" type="number" min="1" max="8" value="4" inputmode="numeric" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="cr-budget">Budget per person (₹)</label>
+              <input id="cr-budget" type="number" min="500" step="100" value="3000" inputmode="numeric" />
+            </div>
+
+            <div class="field">
+              <label>Interests</label>
+              <div class="chip-row" id="cr-interests"></div>
+            </div>
+
+            <div class="field">
+              <label for="cr-pace">Pace</label>
+              <select id="cr-pace" class="select">
+                <option value="Balanced" selected>Balanced</option>
+                <option value="Packed itinerary">Packed itinerary</option>
+                <option value="Slow & relaxed">Slow & relaxed</option>
+              </select>
+            </div>
+
+            <button class="btn btn--primary btn--block" type="button" id="cr-generate" style="margin-top:8px">
+              <svg data-icon="i-arrow" aria-hidden="true"></svg> Generate trip
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- RESULT -->
+      <section class="section" id="cr-result" hidden>
+        <div class="section__head"><h2 class="section__title">Your trip plan</h2></div>
+        <div id="cr-plan"></div>
+
+        <div class="card" style="margin-top:16px">
+          <div class="card__body">
+            <h3 class="card__title" style="margin-bottom:8px">What next?</h3>
+            <div class="create-actions">
+              <button class="btn btn--secondary" type="button" id="cr-save-guide"><svg data-icon="i-plus" aria-hidden="true"></svg> Save as guide</button>
+              <button class="btn btn--primary" type="button" id="cr-push-trip"><svg data-icon="i-check" aria-hidden="true"></svg> Push to my trip</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="tabbar" aria-label="Primary">
+      <a data-nav="trips" href="index.html"><svg class="icon" data-icon="i-trip" aria-hidden="true"></svg><span>Trips</span></a>
+      <a data-nav="guides" href="guides.html"><svg class="icon" data-icon="i-map" aria-hidden="true"></svg><span>Guides</span></a>
+      <a data-nav="discover" href="discover.html"><svg class="icon" data-icon="i-discover" aria-hidden="true"></svg><span>Discover</span></a>
+      <a data-nav="match" href="match.html"><svg class="icon" data-icon="i-match" aria-hidden="true"></svg><span>Match</span></a>
+      <a data-nav="budget" href="budget.html"><svg class="icon" data-icon="i-budget" aria-hidden="true"></svg><span>Budget</span></a>
+      <a data-nav="profile" href="profile.html"><svg class="icon" data-icon="i-profile" aria-hidden="true"></svg><span>Profile</span></a>
+    </nav>
+  </div>
+
+  <script src="assets/js/font.js?v=10"></script>
+  <script src="assets/js/data.js?v=10"></script>
+  <script src="assets/js/app.js?v=10"></script>
+  <script src="assets/js/store.js?v=10"></script>
+  <script src="assets/js/ai-data.js?v=10"></script>
+  <script src="assets/js/ai.js?v=10"></script>
+  <script src="assets/js/create.js?v=10"></script>
+</body>
+</html>

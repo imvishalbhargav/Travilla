@@ -17,6 +17,7 @@
     <span class="topbar__brand">TripCollab</span>
     <nav aria-label="Primary">
       <a data-nav="trips" href="index.html" aria-current="page">Trips</a>
+      <a data-nav="guides" href="guides.html">Guides</a>
       <a data-nav="discover" href="discover.html">Discover</a>
       <a data-nav="transport" href="transport.html">Transport</a>
       <a data-nav="match" href="match.html">Match</a>
@@ -36,9 +37,9 @@
           <h1 class="hero-cinema__title">Travel all of India, together.</h1>
           <p class="hero-cinema__sub">Match with a compatible group, pool budgets, and book stays, flights, trains, buses & cabs — plus verified local guides and hidden gems.</p>
           <div class="hero-cinema__actions">
-            <a class="btn btn--glass" href="discover.html"><svg data-icon="i-discover" aria-hidden="true"></svg> Explore India</a>
-            <a class="btn btn--primary" href="transport.html"><svg data-icon="i-train" aria-hidden="true"></svg> Book transport</a>
-            <a class="btn btn--glass" href="match.html"><svg data-icon="i-match" aria-hidden="true"></svg> Find my group</a>
+            <a class="btn btn--primary" href="guides.html"><svg data-icon="i-map" aria-hidden="true"></svg> Travel guides</a>
+            <a class="btn btn--glass" href="create.html"><svg data-icon="i-plus" aria-hidden="true"></svg> Create with AI</a>
+            <a class="btn btn--glass" href="transport.html"><svg data-icon="i-train" aria-hidden="true"></svg> Book transport</a>
           </div>
         </div>
       </section>
@@ -56,8 +57,15 @@
       <section class="section">
         <div class="section__head">
           <h2 class="section__title">Explore India</h2>
-          <a class="section__link" href="transport.html">Book transport</a>
+          <a class="section__link" href="guides.html">All guides</a>
         </div>
+        <a class="card place-card" href="create.html" style="margin-bottom:16px">
+          <div class="place-card__body">
+            <h3 class="place-card__title" style="margin-bottom:2px">Build your own trip with AI</h3>
+            <p class="place-card__desc">Destination + days + budget → a day-by-day itinerary and shared-cost plan in seconds.</p>
+            <span class="card__meta" style="color:var(--wp-waypoint);font-weight:600;margin-top:8px">Start creating →</span>
+          </div>
+        </a>
         <div class="grid" id="destination-grid"></div>
       </section>
 

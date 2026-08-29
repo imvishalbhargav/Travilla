@@ -348,3 +348,33 @@
 .hero-cinema .btn--glass { background: rgba(255,255,255,0.16); color: #fff; backdrop-filter: blur(6px); }
 .quick-card { display: block; }
 .quick-card:hover { text-decoration: none; border-color: var(--wp-waypoint); }
+
+/* ---- Guides hub (Milestone 11) ---- */
+.guide-card-link { display: block; }
+.guide-card-link:hover { text-decoration: none; border-color: var(--wp-waypoint); }
+.guide-card__foot { display: flex; gap: 0.75rem; align-items: center; margin-top: 12px; }
+.guide-card__author { display: flex; gap: 0.5rem; align-items: center; margin-top: 10px; }
+.guide-card__author-name { font-size: var(--tp-body-sm); font-weight: 600; display: flex; align-items: center; gap: 2px; }
+.badge-verify { display: inline-flex; color: var(--wp-verify); }
+.guide-love.is-liked { color: var(--wp-amber-deep); }
+.guide-love.is-liked svg { fill: currentColor; }
+.chip-toggle {
+  appearance: none; border: 1px solid var(--wp-line); background: var(--wp-surface);
+  color: var(--wp-ink-soft); border-radius: 999px; padding: 0.5rem 0.9rem; font: 600 var(--tp-body-sm) var(--font-ui);
+  cursor: pointer; transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
+}
+.chip-toggle:hover { border-color: var(--wp-waypoint); }
+.chip-toggle.is-on { background: var(--wp-waypoint-soft); border-color: var(--wp-waypoint); color: var(--wp-waypoint-deep); }
+.chip-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+/* ---- Create trip (Milestone 11) ---- */
+.grid-two { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4); }
+.select {
+  width: 100%; appearance: none; border: 1px solid var(--wp-line); border-radius: var(--radius-md);
+  background: var(--wp-surface); color: var(--wp-ink); padding: 0.75rem 0.875rem; font: 400 1rem/1.3 var(--font-ui);
+}
+.select:focus { outline: 2px solid var(--wp-waypoint); outline-offset: 1px; }
+.create-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.create-actions .btn { flex: 1 1 auto; }
+.field label { display: block; font: 600 var(--tp-body-sm) var(--font-ui); color: var(--wp-ink-soft); margin-bottom: 0.375rem; }
+.field input { width: 100%; }
